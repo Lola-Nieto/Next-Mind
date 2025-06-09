@@ -29,6 +29,11 @@
       "nombre": "Pedro",
       "apellido": "González",
       "curso": "4B"
+    },
+    {
+      "nombre": "Matias",
+      "apellido": "Dubin",
+      "curso": "5A"
     }
   ]
 }

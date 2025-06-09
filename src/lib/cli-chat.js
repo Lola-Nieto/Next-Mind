@@ -6,8 +6,12 @@ function imprimirMensaje(mensaje) {
 
 // Formateador de respuestas básico
 function formatResponse(response){
-  return `📝 Respuesta:\n${response.data.result}`;
+  if (response?.data?.result) {
+    return `📝 Respuesta:\n${response.data.result}`;
+  }
+  return `⚠️ No se pudo obtener una respuesta válida.`;
 }
+
 
 const mensajeBienvenidaDefault = `
 🎓 Asistente de Estudiantes 
@@ -37,7 +41,7 @@ async function empezarChat(elAgente, mensajeBienvenida = ''){
 
       imprimirMensaje(formatResponse(respuesta));
       imprimirMensaje(`\n⏱️  Tiempo de respuesta: ${((end - start) / 1000).toFixed(2)} segundos`);
-      imprimirMensaje("\n❓ ¿Qué más querés saber?");
+      imprimirMensaje("\n❓ ¿Qué más querés saber? (Escribí 'exit' para salir)");
     }
   } catch (error) {
     console.error("\n❌ Ups, algo salió mal:", error);

@@ -1,7 +1,13 @@
-// Gestión de estudiantes
 import { readFileSync, writeFileSync } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const DATA_FILE = './data/alumnos.json';
+// Obtener la ruta del archivo actual
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Construir la ruta absoluta al archivo alumnos.json
+const DATA_FILE = path.join(__dirname, '../../backend/data/alumnos.json');
 
 class Estudiantes {
   constructor() {
@@ -10,55 +16,57 @@ class Estudiantes {
   
   cargarEstudiantesDesdeJson() {
     try {
-        const data = JSON.parse(readFileSync(DATA_FILE, 'utf-8'));
-        this.estudiantes = data.alumnos || [];
+      const data = JSON.parse(readFileSync(DATA_FILE, 'utf-8'));
+      this.estudiantes = data.alumnos || [];
     } catch (e) {
-        console.error("Error al leer el archivo de datos:", e);
+      console.error("Error al leer el archivo de datos:", e);
     }
   }
 
   guardarEstudiantes() {
     try {
       writeFileSync(DATA_FILE, JSON.stringify({ alumnos: this.estudiantes }, null, 2));
-      this.cargarEstudiantesDesdeJson();
     } catch (e) {
       console.error("Error al guardar los estudiantes:", e);
       throw new Error("No se pudo guardar la lista de estudiantes.");
     }
   }
+  
 
-  // TODO: Implementar método para agregar estudiante
   agregarEstudiante(nombre, apellido, curso) {
-    
-    try{
-      this.estudiantes.push({"nombre": nombre, "apellido": apellido, "curso": curso});
-    this.guardarEstudiantes();
-  return "El alumno se guardo correctamente"}
-    catch (e){
+    try {
+      if (this.estudiantes.some(est => est.nombre === nombre && est.apellido === apellido && est.curso === curso)) {
+        return "El estudiante ya existe.";
+      }
+      
+      this.estudiantes.push({ nombre, apellido, curso });
+      this.guardarEstudiantes();
+      return "El alumno se guardó correctamente";
+    } catch (e) {
       return "ERROR al agregar estudiante: " + e;
     }
   }
 
-  // TODO: Implementar método para buscar estudiante por nombre
   buscarEstudiantePorNombre(nombre) {
-    return this.estudiantes.filter(est => est.nombre === nombre).map((element) =>
-    `${element.nombre} ${element.apellido} ${element.curso}`
-  );
-
+    return this.estudiantes
+      .filter(est.nombre.toLowerCase().includes(nombre.toLowerCase())
+      )
+      .map(element => `${element.nombre} ${element.apellido} ${element.curso}`);
   }
 
-  // TODO: Implementar método para buscar estudiante por apellido
   buscarEstudiantePorApellido(apellido) {
-    return this.estudiantes.filter(est => est.apellido === apellido);
+    return this.estudiantes
+  .filter(est => est.apellido.toLowerCase().includes(apellido.toLowerCase()))
+  .map(est => `${est.nombre} ${est.apellido} ${est.curso}`);
+
   }
 
-  // TODO: Implementar método para listar estudiantes
   listarEstudiantes() {
-    let datosEst = this.estudiantes.map((element) =>
-      `${element.nombre} ${element.apellido} ${element.curso}`
-    )
-    return datosEst;
+    return this.estudiantes
+  .sort((a, b) => a.apellido.localeCompare(b.apellido))
+  .map(e => `${e.nombre} ${e.apellido} ${e.curso}`);
+
   }
 }
 
-export { Estudiantes }
+export { Estudiantes };

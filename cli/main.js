@@ -80,7 +80,7 @@ const listarEstudiantesTool = tool({
 });
 
 // Configuración del agente
-export const elAgente = agent({
+const elAgente = agent({
     tools: [buscarPorNombreTool, buscarPorApellidoTool, agregarEstudianteTool, listarEstudiantesTool],
     llm: ollamaLLM,
     verbose: DEBUG,
@@ -100,3 +100,5 @@ Puedo ayudarte a:
 
 // Iniciar el chat
 empezarChat(elAgente, mensajeBienvenida);
+
+export default elAgente;
