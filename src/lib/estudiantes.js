@@ -31,7 +31,7 @@ class Estudiantes {
   agregarEstudiante(nombre, apellido, curso) {
     
     try{
-      this.estudiantes.pop({"nombre": nombre, "apellido": apellido, "curso": curso});
+      this.estudiantes.push({"nombre": nombre, "apellido": apellido, "curso": curso});
     this.guardarEstudiantes();
   return "El alumno se guardo correctamente"}
     catch (e){
