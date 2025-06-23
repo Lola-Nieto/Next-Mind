@@ -5,7 +5,7 @@
   "scripts": {
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "start-backend": "node backend/server.js",
-    "start-frontend": "npm --prefix frontend/frontend start"
+    "start-frontend": "npm --prefix frontend start"
   }
   ,
   "author": "",
