@@ -29,6 +29,11 @@
       "nombre": "Pedro",
       "apellido": "González",
       "curso": "4B"
+    },
+    {
+      "nombre": "Leo Messi",
+      "apellido": "Messi",
+      "curso": "3A"
     }
   ]
 }
