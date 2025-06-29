@@ -1,7 +1,14 @@
-// Gestión de estudiantes
 import { readFileSync, writeFileSync } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const DATA_FILE = './data/alumnos.json';
+// Obtener la ruta del archivo actual
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Construir la ruta absoluta al archivo alumnos.json
+const DATA_FILE = path.join(__dirname, '../../backend/data/alumnos.json');
+
 
 class Estudiantes {
   constructor() {

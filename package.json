@@ -1,9 +1,11 @@
 {
-  "name": "ejemplo-llm-1",
+  "name": "next-mind",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node src/main.js"
+    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
+    "start-backend": "node backend/lib/cli-chat.js",
+    "start-frontend": "npm --prefix frontend start"
   },
   "author": "",
   "license": "ISC",
@@ -13,7 +15,10 @@
     "chalk": "^5.4.1",
     "dotenv": "^16.5.0",
     "llamaindex": "^0.10.6",
-    "zod": "^3.24.4"
+    "zod": "^3.24.4", 
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3"
   },
   "type": "module"
 }

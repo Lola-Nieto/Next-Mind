@@ -1,73 +1,72 @@
-# Entregable: Sistema de Gestión de Estudiantes con LLM Tools
+# React Chatbot App
 
-Este proyecto es un entregable para implementar un sistema de gestión de estudiantes utilizando LLMs (Large Language Models) y Tools.
+This project is a simple React application that serves as a chatbot interface. Users can input their questions, and the chatbot will respond based on the existing backend functions.
 
-## 📚 Requisitos Previos
+## Project Structure
 
-- Node.js >= 18
-- [Ollama](https://ollama.com/) instalado y corriendo
-- Modelo qwen3:1.7b instalado
-
-## 🛠 Instalación
-
-1. Instala las dependencias:
-```bash
-npm install
+```
+react-chatbot-app
+├── public
+│   └── index.html          # Main HTML file for the application
+├── src
+│   ├── app.jsx             # Main component for the React application
+│   ├── components
+│   │   ├── ChatInput.jsx   # Component for user input
+│   │   └── MessageList.jsx  # Component for displaying messages
+│   ├── lib
+│   │   └── chatbot.js       # Functions for interacting with the chatbot backend
+│   └── index.js            # Entry point of the React application
+├── package.json             # Configuration file for npm
+└── README.md                # Documentation for the project
 ```
 
-2. Asegúrate de tener Ollama corriendo y el modelo instalado:
-```bash
-ollama run qwen3:1.7b
-```
+## Features
 
-## 🎯 Tu Tarea
+- **User Input**: Users can type their questions into an input field.
+- **Message Display**: The application displays a list of previous messages, including both user queries and chatbot responses.
+- **Chatbot Interaction**: Utilizes existing backend functions to handle user queries and provide responses.
 
-Debes implementar las siguientes funcionalidades:
+## Getting Started
 
-1. En `src/lib/estudiantes.js`:
-   - Método `agregarEstudiante(nombre, apellido, curso)`
-   - Método `buscarEstudiantePorNombre(nombre)`
-   - Método `buscarEstudiantePorApellido(apellido)`
-   - Método `listarEstudiantes()`
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   ```
 
-2. En `src/ejemplo-alumnos-tools.js`:
-   - Tool `buscarPorNombre`
-   - Tool `buscarPorApellido`
-   - Tool `agregarEstudiante`
-   - Tool `listarEstudiantes`
+2. Navigate to the project directory:
+   ```
+   cd react-chatbot-app
+   ```
 
-## 💡 Ayuda
+3. Install dependencies:
+   ```
+   npm install
+   ```
 
-- Cada método y Tool tiene comentarios TODO indicando dónde implementar el código
-- Revisa la documentación de llamaindex para entender cómo funcionan las Tools
-- Utiliza la clase `Estudiantes` para manejar los datos
-- Las Tools deben usar los métodos de la clase `Estudiantes`
+4. Start the application:
+   ```
+   npm start
+   ```
 
-## 🚀 Para Ejecutar
+The application will be available at `http://localhost:3000`.
 
-```bash
-npm start
-```
+## Contributing
 
-## 📝 Notas
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or features you would like to add.
 
-- El código base ya incluye:
-  - Interfaz CLI funcional
-  - Formateo de respuestas
-  - Manejo básico de archivos
-  - Estructura del proyecto
+## License
 
-- No modifiques:
-  - La estructura de los archivos
-  - Los nombres de los métodos/Tools
-  - Los parámetros definidos
+This project is licensed under the MIT License.
 
-## 📚 Recursos
 
-- [Documentación de LlamaIndex](https://docs.llamaindex.ai/)
-- [Documentación de Zod](https://zod.dev/)
-- [Ejemplos de Tools](https://docs.llamaindex.ai/en/stable/examples/tools/)
+DUDA TP 3
 
+endpoint api/chat que recibe una pregunta y lo procesa (corre elAgente.run) está en el front o en el back (en una parte de la consigna dice back, pero dsp en estructura de proyecto archivo api.js está en front)
+
+Hacer que parezca qeu está pensando (mostrar un loading de rta mientras se espera por ella)
+
+
+TOOLS
 
 Funciona 
 Listar alumnos 
