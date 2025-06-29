@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-const ChatInput = ({ onSend }) => {
+const ChatInput = ({ onSendMessage }) => {
     const [inputValue, setInputValue] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (inputValue.trim()) {
-            onSend(inputValue);
+            onSendMessage(inputValue);
             setInputValue('');
         }
     };
