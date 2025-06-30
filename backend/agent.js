@@ -5,6 +5,8 @@ import { empezarChat } from "./lib/cli-chat.js";
 import { Estudiantes } from "./lib/estudiantes.js";
 import { ToolUseTracker } from "./lib/tool-use-tracker.js";
 
+const toolTracker = new ToolUseTracker();
+
 
 // Configuración
 const DEBUG = true;
@@ -41,10 +43,10 @@ const buscarPorNombreTool = tool({
         nombre: z.string().describe("El nombre del estudiante a buscar"),
     }),
     execute: ({ nombre }) => {
-        if (ToolUseTracker.fueUsado("agregarEstudiante")) {
+        if (toolTracker.fueUsado("agregarEstudiante")) {
             return "⚠️ Ya se agregó un estudiante en esta consulta. No deberías repetir esta acción.";
         }
-        ToolUseTracker.registrar("agregarEstudiante");
+        toolTracker.registrar("agregarEstudiante");
         return estudiantes.buscarEstudiantePorNombre(nombre).join("/n");
     },
 });
@@ -57,10 +59,10 @@ const buscarPorApellidoTool = tool({
         apellido: z.string().describe("El apellido del estudiante a buscar"),
     }),
     execute: ({ apellido }) => {
-        if (ToolUseTracker.fueUsado("agregarEstudiante")) {
+        if (toolTracker.fueUsado("agregarEstudiante")) {
             return "⚠️ Ya se agregó un estudiante en esta consulta. No deberías repetir esta acción.";
         }
-        ToolUseTracker.registrar("agregarEstudiante");
+        toolTracker.registrar("agregarEstudiante");
         return estudiantes.buscarEstudiantePorNombre(apellido).join("/n");
     },
 });
@@ -75,10 +77,10 @@ const agregarEstudianteTool = tool({
         curso: z.string().describe("El curso del estudiante (ej: 4A, 4B, 5A)"),
     }),
     execute: ({ nombre, apellido, curso }) => {
-        if (ToolUseTracker.fueUsado("agregarEstudiante")) {
+        if (toolTracker.fueUsado("agregarEstudiante")) {
             return "⚠️ Ya se agregó un estudiante en esta consulta. No deberías repetir esta acción.";
         }
-        ToolUseTracker.registrar("agregarEstudiante");
+        toolTracker.registrar("agregarEstudiante");
         return estudiantes.agregarEstudiante(nombre, apellido, curso);
         
     },
@@ -90,10 +92,10 @@ const listarEstudiantesTool = tool({
     description: "Usa esta función para mostrar todos los estudiantes",
     parameters: z.object({}),
     execute: () => {
-        if (ToolUseTracker.fueUsado("agregarEstudiante")) {
+        if (toolTracker.fueUsado("agregarEstudiante")) {
             return "⚠️ Ya se agregó un estudiante en esta consulta. No deberías repetir esta acción.";
         }
-        ToolUseTracker.registrar("agregarEstudiante");
+        toolTracker.registrar("agregarEstudiante");
         return estudiantes.listarEstudiantes().join(" - ");
     },
 });
