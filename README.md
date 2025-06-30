@@ -61,10 +61,10 @@ This project is licensed under the MIT License.
 
 DUDA TP 3
 
-endpoint api/chat que recibe una pregunta y lo procesa (corre elAgente.run) está en el front o en el back (en una parte de la consigna dice back, pero dsp en estructura de proyecto archivo api.js está en front)
 
 Hacer que parezca qeu está pensando (mostrar un loading de rta mientras se espera por ella)
 
+ToolUseTracker no funciona
 
 TOOLS
 

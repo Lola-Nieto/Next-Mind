@@ -1,13 +1,14 @@
 import { readFileSync, writeFileSync } from 'fs';
-import path from 'path';
+/*import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Obtener la ruta del archivo actual
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+ Obtener la ruta del archivo actual
+//const __filename = fileURLToPath(import.meta.url);
+//const __dirname = path.dirname(__filename);
 
 // Construir la ruta absoluta al archivo alumnos.json
-const DATA_FILE = path.join(__dirname, '../../backend/data/alumnos.json');
+const DATA_FILE = path.join(__dirname, '../../backend/data/alumnos.json');   */
+const DATA_FILE = './data/alumnos.json';
 
 
 class Estudiantes {
