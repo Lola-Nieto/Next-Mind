@@ -3,7 +3,8 @@ import { Ollama } from "@llamaindex/ollama";
 import { z } from "zod";
 import { empezarChat } from "./lib/cli-chat.js";
 import { Estudiantes } from "./lib/estudiantes.js";
-import { ToolUseTracker } from "./lib/tool-tracker.js";
+import { ToolUseTracker } from "./lib/tool-use-tracker.js";
+
 
 // Configuración
 const DEBUG = true;

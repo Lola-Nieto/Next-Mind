@@ -81,3 +81,7 @@ User prompts:
 - Decime si hay alumnos que se apelliden Rodríguez
 
 Se va por exceso de tiempo en operación
+
+
+Entrar a rama del proyecto
+git checkout -b <local_branch_name> origin/<remote_branch_name>

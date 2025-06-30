@@ -1,12 +1,14 @@
 import React from 'react';
+import './MessageList.css';
+
 
 const MessageList = ({ messages }) => {
     return (
         <div className="message-list">
             {messages.map((msg, index) => (
-                <div key={index} className={`message ${msg.isUser ? 'user-message' : 'bot-message'}`}>
-                    <p>{msg.text}</p>
-                </div>
+                <div key={index} className={`message ${msg.sender === 'user' ? 'user-message' : 'bot-message'}`}>
+                <p>{msg.text}</p>
+            </div>
             ))}
         </div>
     );
