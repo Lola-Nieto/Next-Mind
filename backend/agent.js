@@ -25,7 +25,9 @@ Usá las herramientas disponibles para:
 - Agregar nuevos estudiantes
 - Mostrar la lista completa de estudiantes
 
-Respondé de forma clara y breve.
+Respondé de forma clara y breve. 
+Si intentás ejecutar una acción y falta información, pedile al usuario que te la proporcione antes de continuar.
+Respondé solo a la última pregunta del usuario, usando el contexto anterior solo si es necesario.
 `.trim();
 
 const ollamaLLM = new Ollama({
@@ -35,7 +37,6 @@ const ollamaLLM = new Ollama({
 });
 
 
-// TODO: Implementar la Tool para buscar por nombre
 const buscarPorNombreTool = tool({
     name: "buscarPorNombre",
     description: "Usa esta función para encontrar estudiantes por su nombre",
@@ -43,6 +44,9 @@ const buscarPorNombreTool = tool({
         nombre: z.string().describe("El nombre del estudiante a buscar"),
     }),
     execute: ({ nombre }) => {
+        if(!nombre) {
+            return "Por favor, proporciona el nombre del estudiante que deseas buscar.";    
+        }
         if (toolTracker.fueUsado("agregarEstudiante")) {
             return "⚠️ Ya se agregó un estudiante en esta consulta. No deberías repetir esta acción.";
         }
@@ -51,7 +55,6 @@ const buscarPorNombreTool = tool({
     },
 });
 
-// TODO: Implementar la Tool para buscar por apellido
 const buscarPorApellidoTool = tool({
     name: "buscarPorApellido",
     description: "Usa esta función para encontrar estudiantes por su apellido",
@@ -59,15 +62,17 @@ const buscarPorApellidoTool = tool({
         apellido: z.string().describe("El apellido del estudiante a buscar"),
     }),
     execute: ({ apellido }) => {
+        if(!apellido) {
+            return "Por favor, proporciona el apellido del estudiante que deseas buscar.";
+        }
         if (toolTracker.fueUsado("agregarEstudiante")) {
             return "⚠️ Ya se agregó un estudiante en esta consulta. No deberías repetir esta acción.";
         }
         toolTracker.registrar("agregarEstudiante");
-        return estudiantes.buscarEstudiantePorNombre(apellido).join("/n");
+        return estudiantes.buscarEstudiantePorApellido(apellido).join("/n");
     },
 });
 
-// TODO: Implementar la Tool para agregar estudiante
 const agregarEstudianteTool = tool({
     name: "agregarEstudiante",
     description: "Usa esta función para agregar un nuevo estudiante",
@@ -77,6 +82,9 @@ const agregarEstudianteTool = tool({
         curso: z.string().describe("El curso del estudiante (ej: 4A, 4B, 5A)"),
     }),
     execute: ({ nombre, apellido, curso }) => {
+        if (!nombre || !apellido || !curso) {
+            return "Por favor, proporciona tanto el nombre como el apellido y el curso del estudiante.";
+        }
         if (toolTracker.fueUsado("agregarEstudiante")) {
             return "⚠️ Ya se agregó un estudiante en esta consulta. No deberías repetir esta acción.";
         }
@@ -86,7 +94,6 @@ const agregarEstudianteTool = tool({
     },
 });
 
-// TODO: Implementar la Tool para listar estudiantes
 const listarEstudiantesTool = tool({
     name: "listarEstudiantes",
     description: "Usa esta función para mostrar todos los estudiantes",
@@ -121,3 +128,5 @@ Puedo ayudarte a:
 
 // Iniciar el chat
 //empezarChat(elAgente, mensajeBienvenida);
+
+export { toolTracker };

@@ -31,9 +31,14 @@
       "curso": "4B"
     },
     {
-      "nombre": "Leo Messi",
+      "nombre": "Leo",
       "apellido": "Messi",
       "curso": "3A"
+    },
+    {
+      "nombre": "Lola",
+      "apellido": "Nieto",
+      "curso": "5IA"
     }
   ]
 }

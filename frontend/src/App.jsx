@@ -13,7 +13,7 @@ const App = () => {
          setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:3001/api/chat', { mensaje: question });
+            const response = await axios.post('http://localhost:3001/api/chat', { conversacion: messages });
             const botMessage = { text: response.data.respuesta.data?.result || response.data.respuesta, sender: 'bot' };
             setMessages((prevMessages) => [...prevMessages, botMessage]);
         } catch (error) {

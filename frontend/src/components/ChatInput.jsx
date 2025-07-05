@@ -5,7 +5,7 @@ const ChatInput = ({ onSendMessage }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (inputValue.trim()) {
+        if (!inputValue.trim()) {
             onSendMessage(inputValue);
             setInputValue('');
         }

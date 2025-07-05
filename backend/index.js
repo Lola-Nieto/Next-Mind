@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { elAgente } from "./agent.js";
+import { elAgente, toolTracker } from "./agent.js";
 
 const app = express();
 const PORT = 3001;
@@ -16,14 +16,13 @@ app.get("/", (req, res) => {
 
 // Endpoint para el chat
 app.post("/api/chat", async (req, res) => {
-  const { mensaje } = req.body;
+  const { conversacion } = req.body;
+  toolTracker.reset();
 
-  if (!mensaje) {
-    return res.status(400).json({ error: "El mensaje es requerido" });
-  }
+  console.log("Conversacion recibida:", conversacion);
 
   try {
-    const respuesta = await elAgente.run(mensaje);
+    const respuesta = await elAgente.run(conversacion);
     res.json({ respuesta });
   } catch (error) {
     console.error(error);
