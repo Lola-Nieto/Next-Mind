@@ -36,9 +36,19 @@
       "curso": "3A"
     },
     {
-      "nombre": "Lola",
-      "apellido": "Nieto",
-      "curso": "5IA"
+      "nombre": "Lucía",
+      "apellido": "Fernández",
+      "curso": "5A"
+    },
+    {
+      "nombre": "Sofía",
+      "apellido": "Gómez",
+      "curso": "4B"
+    },
+    {
+      "nombre": "Juan",
+      "apellido": "Rodriguez",
+      "curso": "5B"
     }
   ]
 }

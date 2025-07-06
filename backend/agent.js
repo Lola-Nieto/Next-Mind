@@ -9,7 +9,7 @@ const toolTracker = new ToolUseTracker();
 
 
 // Configuración
-const DEBUG = true;
+const DEBUG = false;
 
 // Instancia de la clase Estudiantes
 const estudiantes = new Estudiantes();
@@ -28,6 +28,7 @@ Usá las herramientas disponibles para:
 Respondé de forma clara y breve. 
 Si intentás ejecutar una acción y falta información, pedile al usuario que te la proporcione antes de continuar.
 Respondé solo a la última pregunta del usuario, usando el contexto anterior solo si es necesario.
+Realiza únicamente la acción solicitada por el usuario. Si el usuario solo pide buscar, no sugieras agregar estudiantes.
 `.trim();
 
 const ollamaLLM = new Ollama({
@@ -39,7 +40,7 @@ const ollamaLLM = new Ollama({
 
 const buscarPorNombreTool = tool({
     name: "buscarPorNombre",
-    description: "Usa esta función para encontrar estudiantes por su nombre",
+    description: "Usa esta función para encontrar estudiantes por su nombre cuando el usuario pide buscar un estudiante brindando nombre",
     parameters: z.object({
         nombre: z.string().describe("El nombre del estudiante a buscar"),
     }),
@@ -57,7 +58,7 @@ const buscarPorNombreTool = tool({
 
 const buscarPorApellidoTool = tool({
     name: "buscarPorApellido",
-    description: "Usa esta función para encontrar estudiantes por su apellido",
+    description: "Usa esta función para encontrar estudiantes por su apellido cuando el usuario pide buscar un estudiante brindando apellido",
     parameters: z.object({
         apellido: z.string().describe("El apellido del estudiante a buscar"),
     }),
@@ -75,7 +76,7 @@ const buscarPorApellidoTool = tool({
 
 const agregarEstudianteTool = tool({
     name: "agregarEstudiante",
-    description: "Usa esta función para agregar un nuevo estudiante",
+    description: "Usa esta función para agregar un nuevo estudiante cuando el usuario lo solicite",
     parameters: z.object({
         nombre: z.string().describe("El nombre del estudiante"),
         apellido: z.string().describe("El apellido del estudiante"),

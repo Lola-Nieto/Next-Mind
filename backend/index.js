@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { elAgente, toolTracker } from "./agent.js";
 
+
 const app = express();
 const PORT = 3001;
 
@@ -16,14 +17,30 @@ app.get("/", (req, res) => {
 
 // Endpoint para el chat
 app.post("/api/chat", async (req, res) => {
-  const { conversacion } = req.body;
+  const { mensaje } = req.body;
   toolTracker.reset();
 
-  console.log("Conversacion recibida:", conversacion);
+  console.log("Mensaje recibido:", mensaje);
 
+  // Use only the memory as context for the agent
   try {
-    const respuesta = await elAgente.run(conversacion);
-    res.json({ respuesta });
+    const respuesta = await elAgente.run(mensaje);
+
+    let thought = '';
+    let finalAnswer = respuesta;
+    const match = respuesta.match(/<think>([\s\S]*?)<\/think>([\s\S]*)/i);
+    if (match) {
+      thought = match[1].trim();
+      finalAnswer = match[2].trim();
+    }
+
+    // Show verbose/thought in backend console
+    if (thought) {
+      console.log('AGENT THOUGHT:', thought);
+    }
+    // Send only the final answer to the frontend
+    res.json({ respuesta: finalAnswer });
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al procesar la solicitud" });

@@ -1,86 +1,29 @@
-# React Chatbot App
-
-This project is a simple React application that serves as a chatbot interface. Users can input their questions, and the chatbot will respond based on the existing backend functions.
-
-## Project Structure
-
-```
-react-chatbot-app
-├── public
-│   └── index.html          # Main HTML file for the application
-├── src
-│   ├── app.jsx             # Main component for the React application
-│   ├── components
-│   │   ├── ChatInput.jsx   # Component for user input
-│   │   └── MessageList.jsx  # Component for displaying messages
-│   ├── lib
-│   │   └── chatbot.js       # Functions for interacting with the chatbot backend
-│   └── index.js            # Entry point of the React application
-├── package.json             # Configuration file for npm
-└── README.md                # Documentation for the project
-```
-
-## Features
-
-- **User Input**: Users can type their questions into an input field.
-- **Message Display**: The application displays a list of previous messages, including both user queries and chatbot responses.
-- **Chatbot Interaction**: Utilizes existing backend functions to handle user queries and provide responses.
-
-## Getting Started
-
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   ```
-
-2. Navigate to the project directory:
-   ```
-   cd react-chatbot-app
-   ```
-
-3. Install dependencies:
-   ```
-   npm install
-   ```
-
-4. Start the application:
-   ```
-   npm start
-   ```
-
-The application will be available at `http://localhost:3000`.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or features you would like to add.
-
-## License
-
-This project is licensed under the MIT License.
-
-
-DUDA TP 3
-
-
-Hacer que parezca qeu está pensando (mostrar un loading de rta mientras se espera por ella)
-
-ToolUseTracker no funciona
-
-TOOLS
-
-Funciona 
-Listar alumnos 
-Buscar por nombre
 
 
 Falla
-Buscar por apellido -->
-User prompts: 
-- Hay alumnos que se apelliden Rodríguez
-- Quiero buscar un alumno que se apellida González, está en la lista?
-- Decime si hay alumnos que se apelliden Rodríguez
+- Agregar a un estudiante --> 
+   Piensa que el nombre es el nombre y tmb el apellido si solo doy el nombre (dsp no volvio a pasar)
 
-Se va por exceso de tiempo en operación
+- BuscarPorNombre --> 
+   Esta la alumna llamada Lola en la lista?
+   Tira que revisa y está, pero tmb q el usuario intentó agregarla de nuevo (no es así) - igualmente no la agrega, indicando qeu ya está
+
+- BuscarPorApellido --> 
+   Esta el alumno con apellido Nieto?  The response was [object Object], which means there might be results or maybe it's empty. Since the response isn't clear, I need to ask the user to provide more details. Let me check the tools again. The function returns whatever is returned by the database, so if there's no result, it's probably empty. But the user didn't specify if there's a match or not. To be safe, I should ask them to confirm if they want to search again or check another aspect. Keep it simple and clear. </think> ¿Podrías confirmar si hay un estudiante con el apellido "Nieto" o deseas buscar otro criterio?
+
+
+
+DUDA  --> Memoria esta disponible en este modelo?
+      --> Es mejor sacar toolTracker? (esta trayendo mas problemas q soluciones tal vez)
+
+IMPLEMENTAR
+- Memoria --> ContenxtChatEngine (ver segun el framework como incorporar memoria en la consulta y que la acepte)
+
+RAG (?) --> https://docs.llamaindex.ai/en/stable/examples/chat_engine/chat_engine_context/ 
+
+
+
+
 
 
 Entrar a rama del proyecto

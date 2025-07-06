@@ -8,18 +8,19 @@ const App = () => {
     const [loading, setLoading] = useState(false);
 
     const handleSendMessage = async (question) => {
-        const userMessage = { text: question, sender: 'user' };
-        setMessages((prevMessages) => [...prevMessages, userMessage]);
-         setLoading(true);
+        const userMessage = { role: 'user', content: question };
+        const newMessages = [...messages, userMessage];
+        setMessages(newMessages);
+        setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:3001/api/chat', { conversacion: messages });
-            const botMessage = { text: response.data.respuesta.data?.result || response.data.respuesta, sender: 'bot' };
+            const response = await axios.post('http://localhost:3001/api/chat', { mensaje: question });
+            const botMessage = { role: 'bot', content: response.data.respuesta.data?.result || response.data.respuesta };
             setMessages((prevMessages) => [...prevMessages, botMessage]);
         } catch (error) {
             setMessages((prevMessages) => [
                 ...prevMessages,
-                { text: 'Error al comunicarse con el servidor.', sender: 'bot' }
+                { role: 'bot', content: 'Error al comunicarse con el servidor.' }
             ]);
         } finally {
             setLoading(false);
@@ -28,7 +29,7 @@ const App = () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-            <MessageList messages={messages} />
+            <MessageList messages={messages} loading={loading} />
             <ChatInput onSendMessage={handleSendMessage} disabled={loading} />
         </div>
     );
